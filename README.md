@@ -1,2 +1,2 @@
-# 2021-1e-Mikolasek-hra-DND
+# 2021-1e-Mikolasek-hra_DND
 deez nuts
