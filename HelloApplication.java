@@ -1,4 +1,5 @@
 package com.example.dnd1;
+import java.util.Random;
 import java.util.Scanner;
 
 import javafx.application.Application;
@@ -44,8 +45,98 @@ public class HelloApplication extends Application {
                 System.out.println("\033[3mreceived armor\033[0m");
                 Thread.sleep(500);
                 System.out.println("now you look like a true hero! Now, let us begin your story.");
+                Random rand = new Random();
+                int d5 = rand.nextInt(4);
+                if (d5 == 0) {
+                    firstencouner1();
+                } else if (d5 == 1) {
+                    firstencounter2();
+                } else if (d5 == 2) {
+                    firstencounter3();
+                } else if (d5 == 3) {
+                    firstencounter4();
+                } else if (d5 == 4) {
+                    firstencounter5();
+                }
             }
         }
+
+
+    }
+
+    private static void firstencounter5() {
+        System.out.println("first encounter 5");
+        int enemyhealth;
+        enemyhealth = 10;
+        for (;enemyhealth>1;) {
+            System.out.println("enemy health: " + enemyhealth);
+            Random rand = new Random();
+            int d20 = rand.nextInt(19);
+            enemyhealth = enemyhealth - d20;
+            System.out.println("enemy health: " + enemyhealth);
+
+        }
+        System.out.println("enemy slain!");
+    }
+
+    private static void firstencounter4() {
+        System.out.println("first encounter 4");
+        int enemyhealth;
+        enemyhealth = 10;
+        for (;enemyhealth>1;) {
+            System.out.println("enemy health: " + enemyhealth);
+            Random rand = new Random();
+            int d20 = rand.nextInt(19);
+            enemyhealth = enemyhealth - d20;
+            System.out.println("enemy health: " + enemyhealth);
+
+        }
+        System.out.println("enemy slain!");
+    }
+
+    private static void firstencounter3() {
+        System.out.println("first encounter 3");
+        int enemyhealth;
+        enemyhealth = 10;
+        for (;enemyhealth>1;) {
+            System.out.println("enemy health: " + enemyhealth);
+            Random rand = new Random();
+            int d20 = rand.nextInt(19);
+            enemyhealth = enemyhealth - d20;
+            System.out.println("enemy health: " + enemyhealth);
+
+        }
+        System.out.println("enemy slain!");
+    }
+
+    private static void firstencounter2() {
+        System.out.println("first encounter 2");
+        int enemyhealth;
+        enemyhealth = 10;
+        for (;enemyhealth>1;) {
+            System.out.println("enemy health: " + enemyhealth);
+            Random rand = new Random();
+            int d20 = rand.nextInt(19);
+            enemyhealth = enemyhealth - d20;
+            System.out.println("enemy health: " + enemyhealth);
+
+        }
+        System.out.println("enemy slain!");
+    }
+
+    private static void firstencouner1() {
+        System.out.println("first encounter 1");
+        int enemyhealth;
+        enemyhealth = 10;
+        for (;enemyhealth>1;) {
+            System.out.println("enemy health: " + enemyhealth);
+            Random rand = new Random();
+            int d20 = rand.nextInt(19);
+            enemyhealth = enemyhealth - d20;
+            System.out.println("enemy health: " + enemyhealth);
+
+        }
+        System.out.println("enemy slain!");
 
 
     }
