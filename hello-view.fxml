@@ -14,10 +14,11 @@
          <Font size="75.0" />
       </font></Label>
    <TextArea fx:id="textarea" editable="false" prefHeight="200.0" prefWidth="200.0" text="New Game?" visible="false" />
-   <TextField fx:id="pole" onAction="#onenter" prefHeight="33.0" prefWidth="464.0" promptText="yes / no" visible="false" />
+   <TextField fx:id="pole" onAction="#onenter" prefHeight="33.0" prefWidth="464.0" promptText="type [a] or [b]" visible="false" />
    <FlowPane alignment="CENTER" blendMode="SRC_ATOP" hgap="100.0" prefHeight="22.0" prefWidth="464.0">
       <children>
          <Button fx:id="newgamebutt" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#onnewgame" prefHeight="25.0" prefWidth="86.0" text="New game" textAlignment="CENTER" />
+         <Button fx:id="rollbutt" mnemonicParsing="false" onAction="#onroll" text="Roll!" visible="false" />
          <Button fx:id="quitbutt" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onquit" prefHeight="25.0" prefWidth="88.0" text="Quit" textAlignment="CENTER">
             <FlowPane.margin>
                <Insets />

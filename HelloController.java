@@ -6,11 +6,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import java.util.Random;
 
 
 
 public class HelloController {
+    Random rand = new Random();
     boolean answer = true;
+    int damageboost = 0;
+    int diceroll = 0;
+    int bosstemp = 0;
+    int enemyhealth = 200;
+    int health = 200;
     int encounternumber = 0;
     // tenhle int si pamatuje pocet zabiti, zobrazi se pri smrti, nebo vyhre
     int kills = 0;
@@ -33,6 +40,16 @@ public class HelloController {
     private Label gamelabel;
 
     @FXML
+    private Button rollbutt;
+
+    @FXML
+    protected void onroll() {
+        diceroll = rand.nextInt(19);
+        bosstemp ++;
+        fightone();
+    }
+
+    @FXML
     protected void onnewgame() throws InterruptedException {
         gamestart();
         quitbutt.setVisible(false);
@@ -50,20 +67,60 @@ public class HelloController {
     @FXML
     protected void onenter() {
         String answr = pole.getText();
+
         if (answr.contains("a")) {
             pole.clear();
             answer = true;
             encounternumber ++;
             if (encounternumber == 1) {encounterone();} else
-                if (encounternumber == 2) {encountertwo();}
+            if (encounternumber == 2) {encounteroneresulta();} else
+            if (encounternumber == 3) {fightone();} else
+            if (encounternumber == 4) {encountertwo();} else
+            if (encounternumber == 5) {encountertworesulta();}
 
         } else if (answr.contains("b")) {
             pole.clear();
             answer = false;
             encounternumber ++;
             if (encounternumber == 1) {encounterone();} else
-            if (encounternumber == 2) {encountertwo();}
+            if (encounternumber == 2) {encounteroneresultb();} else
+            if (encounternumber == 3) {fightone();} else
+            if (encounternumber == 4) {encountertwo();} else
+            if (encounternumber == 5) {encountertworesultb();}  
+
         } else {pole.clear();}
+    }
+
+    private void encountertworesultb() {textarea.setText("encounteroneresultb");}
+
+    private void encountertworesulta() {textarea.setText("encounteroneresulta");}
+
+    private void fightone() {
+        pole.setVisible(false);
+        rollbutt.setVisible(true);
+        if (bosstemp == 0) {
+            textarea.setText("begin boss sequence" + "\n" + "health: " + health + "\n" + "enemy health: " + enemyhealth );
+        }
+        if (bosstemp > 0 && health > 0 && enemyhealth > 0) {
+            enemyhealth = enemyhealth - (diceroll*10) + damageboost;
+            textarea.setText("you rolled " + (diceroll + 1) + "\n" + "enemy health: " + enemyhealth);
+        }
+        if (health <= 0) {gameover();}
+        if (enemyhealth <= 0) {fightonevictory();}
+    }
+
+    private void fightonevictory() {
+        textarea.setText("you killed 1st boss");
+        rollbutt.setVisible(false);
+        pole.setVisible(true);
+    }
+
+    private void encounteroneresulta() {
+        textarea.setText("encounteroneresulta");
+    }
+
+    private void encounteroneresultb() {
+        textarea.setText("encounteroneresultb");
     }
 
     private void encountertwo() {
@@ -71,9 +128,8 @@ public class HelloController {
     }
 
     private void gamestart() throws InterruptedException {
-        textarea.setText("ZACATEK HRY + prvni vyber ano ne");
-
-        }
+        textarea.setText("gamestart continue[a] quit[b]");
+    }
 
 
 
