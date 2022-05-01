@@ -12,38 +12,60 @@ import java.util.Random;
 
 public class HelloController {
     Random rand = new Random();
-    int weakness = 0;
+
+
     int activeEncounter = 0;
-    // tenhle int si pamatuje pocet zabiti, zobrazi se pri smrti, nebo vyhre
+
+    // tenhle int si pamatuje počet zabitých nepřatel, zobrazí se při smrti
     int fightsWon = 0;
+
+    //pri některých zápletkách může hráč zvýšení poškození až +30
     int damageBoost = 0;
+
+    //take muze ziskat oslabení, takže bude naopak dostávat od nepŕátel více poškození
+    int weakness = 0;
+
+    //tenhle int se používá na generování náhodných čísel pro házení kostkou při souboji
     int diceRoll = 0;
+
     int bossTemp = 0;
+
+    //zdraví nepřátel, hráč vyhraje souboj, pokud zdraví nepřitele dosáhne nuly, nebo pokud na kostce hodí 20
     int enemyHealth = 200;
-    //tento int si pamatuje zdravi hrace, pokud dosahne 0, hra konci
+
+    //zdraví hráče, pokud dosáhne nuly, hra končí
     int health = 200;
+
     int encounterNumber = 0;
+
     // tenhle string rika duvod smrti hrace
     String deathCause = "DUVODSMRTI";
 
+    //textové pole, kde se zobrazuje příběh
     @FXML
     private TextArea textArea;
 
+    //textové pole, kam hráč píše svojí odpověď
     @FXML
     private TextField textField;
 
+    //tlačítko pro ukončení hry
     @FXML
     private Button quitButton;
 
+    //tlačítko pro restartování hry při smrti hráče
     @FXML
     private Button tryAgainButton;
 
+    //tlačítko pro začátek hry
     @FXML
     private Button newGameButton;
 
+    //jméno hry
     @FXML
     private Label gameLabel;
 
+    //tlačítko pro hození kostky při souboji
     @FXML
     private Button rollButton;
 
@@ -57,6 +79,11 @@ public class HelloController {
         gameLabel.setVisible(false);
     }
 
+    /*
+    *při kliknutí na tlačítko Roll! se zobrazí kolik hráčovi padlo od 1 do 20 a podle toho dá nepříteli poškození.
+    * Když padne vysoké číslo, hráč dá nepřiteli hodně poškození a nepřítel dá málo poškození hráčovi a naopak.
+    */
+
     @FXML
     protected void onRoll() {
         diceRoll = rand.nextInt(20);
@@ -66,6 +93,7 @@ public class HelloController {
         if (fightsWon == 2) {fight3();}
     }
 
+    //tlačítko Try again má stejnou funkci jako tlačítko New game, zobrazí se při smrti hráče aby mohl rovnou začít od začátku
     @FXML
     protected void onTryAgain() {
         weakness = 0;
@@ -84,11 +112,13 @@ public class HelloController {
         tryAgainButton.setVisible(false);
     }
 
+    //tlačítko Quit ukončí program
     @FXML
     protected void onQuit() {
         Platform.exit();
     }
 
+    //když hráč zadá buď a nebo b do textového pole a stiskne enter
     @FXML
     protected void onEnter() {
         String answer = textField.getText();
@@ -176,6 +206,7 @@ public class HelloController {
         );
     }
 
+    //pokud hrá
     private void gameOver() {
         textArea.setText("GAME OVER!"
                          + "\n" + deathCause
@@ -930,6 +961,7 @@ public class HelloController {
                 Your clothes are soaked and heavy.
                 
                 -gained weakness
+                [a]continue
                 """);
             weakness = weakness + 10;
         }
@@ -1102,7 +1134,7 @@ public class HelloController {
                          + "\n" + "You know what You're doing and concentrate on dodging the wizard's attacks."
                          + "\n" + "health: " + health);
         rollButton.setVisible(false);
-        textField.setVisible(true);
+        quitButton.setVisible(true);
         fightsWon++;
         enemyHealth = 200;
         bossTemp = 0;
