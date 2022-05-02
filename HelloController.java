@@ -79,9 +79,9 @@ public class HelloController {
         gameLabel.setVisible(false);
     }
 
-    /*
-    *při kliknutí na tlačítko Roll! se zobrazí kolik hráčovi padlo od 1 do 20 a podle toho dá nepříteli poškození.
-    * Když padne vysoké číslo, hráč dá nepřiteli hodně poškození a nepřítel dá málo poškození hráčovi a naopak.
+
+    /*při kliknutí na tlačítko Roll! se zobrazí kolik hráčovi padlo od 1 do 20 a podle toho dá nepříteli poškození.
+     Když padne vysoké číslo, hráč dá nepřiteli hodně poškození a nepřítel dá málo poškození hráčovi a naopak.
     */
 
     @FXML
@@ -118,7 +118,7 @@ public class HelloController {
         Platform.exit();
     }
 
-    //když hráč zadá buď a nebo b do textového pole a stiskne enter
+    //když hráč zadá buď a nebo b do textového pole a stiskne enter, program pokračuje na další encounter nebo souboj
     @FXML
     protected void onEnter() {
         String answer = textField.getText();
@@ -206,7 +206,7 @@ public class HelloController {
         );
     }
 
-    //pokud hrá
+    //pokud hráč zvolí špatnou možnost při encounteru nebo jeho zdraví dosáhne nuly při souboji, zobrazí se Game Over! a důvod smrti hráče
     private void gameOver() {
         textArea.setText("GAME OVER!"
                          + "\n" + deathCause
@@ -216,6 +216,7 @@ public class HelloController {
         tryAgainButton.setVisible(true);
     }
 
+    //tato metoda vygeneruje náhodné číslo od 0 do 3 a podle toho zvolí encounter
     private void encounter1Decider() {
         Random rand = new Random();
         int d5 = rand.nextInt(4);
@@ -426,18 +427,19 @@ public class HelloController {
         gameOver();
     }
 
+    //metoda fight, pokaždé když hráč stiskne tlačítko Roll, zobrazí se jaké číslo mu padlo, jeho zdraví a zdraví nepřítele
     private void fight1() {
         textField.setVisible(false);
         rollButton.setVisible(true);
         if (bossTemp == 0) {
             enemyHealth = 200;
             textArea.setText("You carry on with your adventure and walk out of town."
-                             + "\n" + "When you get to the next town, you see a guard at the gates."
-                             + "\n" + "He looks about twice your size and has a scary looking sword."
-                             + "\n" + "You unsheathe your sword and run towards him."
-                             + "\n" + ""
-                             + "\n" + "health: " + health
-                             + "\n" + "enemy health: " + enemyHealth
+                    + "\n" + "When you get to the next town, you see a guard at the gates."
+                    + "\n" + "He looks about twice your size and has a scary looking sword."
+                    + "\n" + "You unsheathe your sword and run towards him."
+                    + "\n" + ""
+                    + "\n" + "health: " + health
+                    + "\n" + "enemy health: " + enemyHealth
             );
         }
         if (bossTemp > 0 && health > 0 && enemyHealth > 0) {
@@ -491,12 +493,13 @@ public class HelloController {
     }
 
     private void fight1Victory() {
-        textArea.setText("After many successful strikes your sword is soaked in the guard's blood."
-                         + "\n" + "He looks very weak and tired."
-                         + "\n" + "You gather all your strength, run towards him and pierce his heart."
-                         + "\n" + ""
-                         + "\n" + "health: " + health
-                         + "\n" + "[a]continue"
+        textArea.setText("Victory!"
+                + "\n" + "After many successful strikes your sword is soaked in the guard's blood."
+                + "\n" + "He looks very weak and tired."
+                + "\n" + "You gather all your strength, run towards him and pierce his heart."
+                + "\n" + ""
+                + "\n" + "health: " + health
+                + "\n" + "[a]continue"
         );
         rollButton.setVisible(false);
         textField.setVisible(true);
@@ -505,6 +508,7 @@ public class HelloController {
         bossTemp = 0;
     }
 
+    // pokud padne číslo 20, hráč automaticky souboj vyhraje
     private void fight1InstaVictory() {
         health = 200;
         textArea.setText("You rolled a 20!"
@@ -821,14 +825,15 @@ public class HelloController {
     }
 
     private void fight2Victory() {
-        textArea.setText("You get hit a few times, but you start to memorise the guard's movements."
-                         + "\n" + "After some time you can dodge almost all of his attacks and strike back."
-                         + "\n" + "You see frustration and exhaustion in his eyes as you keep striking him."
-                         + "\n" + "His movements are now very slow and he can't hit you anymore."
-                         + "\n" + "You hit him a few more times until he falls to the ground, defeated."
-                         + "\n" + ""
-                         + "\n" + "health: " + health
-                         + "\n" + "[a]continue"
+        textArea.setText("Victory!"
+                + "\n" + "You get hit a few times, but you start to memorise the guard's movements."
+                + "\n" + "After some time you can dodge almost all of his attacks and strike back."
+                + "\n" + "You see frustration and exhaustion in his eyes as you keep striking him."
+                + "\n" + "His movements are now very slow and he can't hit you anymore."
+                + "\n" + "You hit him a few more times until he falls to the ground, defeated."
+                + "\n" + ""
+                + "\n" + "health: " + health
+                + "\n" + "[a]continue"
         );
         rollButton.setVisible(false);
         textField.setVisible(true);
@@ -1130,9 +1135,23 @@ public class HelloController {
     }
 
     private void fight3Victory() {
-        textArea.setText("You've come this far and you won't let anything stop you now."
-                         + "\n" + "You know what You're doing and concentrate on dodging the wizard's attacks."
-                         + "\n" + "health: " + health);
+        textArea.setText("""
+                Victory!
+                You've come this far and you won't let anything stop you now.
+                You know what You're doing and concentrate on dodging the wizard's attacks.
+                You dodge his attacks almost perfectly and only get hit a couple of times.
+                With maximum focus, you slash the wizard with your sword, making him bleed heavily.
+                He looks surprised, that you've been able to evade his attacks until now.
+                You waste no time and continue to hit him with all you've got.
+                He seems to be in lots of pain and his attacks are slow.
+                This is your chance to rid Rose castle of the evil wizard.
+                You charge forward for a finishing strike.
+                The wizard tries to make a force field as a last attempt to defend himself,
+                but with your determination and skill, you manage to  break it and deliver a finishing strike, taking his life.
+                You managed to kill the evil wizard and free your dream knight.
+                And then he lived happily ever after, GG!
+                """
+        );
         rollButton.setVisible(false);
         quitButton.setVisible(true);
         fightsWon++;
